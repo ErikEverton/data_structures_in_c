@@ -8,6 +8,9 @@ typedef struct node {
 
 
 struct node * create_node(int val);
+struct node * delete_head(node * head);
+struct node * delete_in_any_position(node * head, int key);
+struct node * delete_tail(node * head);
 struct node * insert_at_the_beggining(node * head, int val);
 struct node * insert_at_the_end(node * head, int val);
 struct node * insert_in_any_posistion(node * haed, int val, int key);
@@ -39,9 +42,52 @@ int main(void) {
 
     insert_in_any_posistion(head, 21, 7);
 
+    for (int i = 0; i <= 5; i++) {
+        head = delete_head(head);
+    }
+
+    for (int i = 0; i <= 5; i++) {
+        delete_tail(head);
+    }
+
+    for (int i = 0; i <= 15; i++) {
+        
+    }
+
 
     print_list(head);
     return 0;
+}
+
+
+struct node * delete_head(node * head) {
+    head = head->next;
+    return head;
+}
+
+
+struct node * delete_in_any_position(node * current, int key) {
+    node * previous;
+    while (current->next != NULL) {
+        if (current->value == key) {
+            previous->next = current->next;
+            current = NULL;
+        }
+        previous = current;
+        current = current->next;
+    }
+}
+
+
+struct node * delete_tail(node * current) {
+    node * previous;
+    while(current->next != NULL) {
+        previous = current;
+        current = current->next;
+    }
+
+    previous->next = NULL;
+    return current;
 }
 
 
