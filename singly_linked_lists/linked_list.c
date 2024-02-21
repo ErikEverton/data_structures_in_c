@@ -50,10 +50,10 @@ int main(void) {
         delete_tail(head);
     }
 
-    for (int i = 0; i <= 15; i++) {
-        
-    }
-
+    head = delete_in_any_position(head, 5);
+    delete_in_any_position(head, 11);
+    delete_in_any_position(head, 3);
+    delete_in_any_position(head, 14);
 
     print_list(head);
     return 0;
@@ -68,14 +68,22 @@ struct node * delete_head(node * head) {
 
 struct node * delete_in_any_position(node * current, int key) {
     node * previous;
-    while (current->next != NULL) {
+
+    if (current->value == key) {
+        current = current->next;
+        return current;
+    }
+
+    while (current != NULL) {
+        previous = current;
+        current = current->next;
         if (current->value == key) {
             previous->next = current->next;
             current = NULL;
+            return previous->next;
         }
-        previous = current;
-        current = current->next;
     }
+    return current;
 }
 
 
