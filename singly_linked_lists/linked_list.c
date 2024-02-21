@@ -11,6 +11,7 @@ struct node * create_node(int val);
 struct node * delete_head(node * head);
 struct node * delete_in_any_position(node * head, int key);
 struct node * delete_tail(node * head);
+int find_length(node * head);
 struct node * insert_at_the_beggining(node * head, int val);
 struct node * insert_at_the_end(node * head, int val);
 struct node * insert_in_any_posistion(node * haed, int val, int key);
@@ -56,6 +57,11 @@ int main(void) {
     delete_in_any_position(head, 14);
 
     print_list(head);
+
+    int length = find_length(head);
+
+    printf("Total of elements in the list: %d\n", length);
+
     return 0;
 }
 
@@ -109,6 +115,16 @@ struct node * create_node(int val) {
     new_node->value = val;
     new_node->next = NULL;
     return new_node;
+}
+
+
+int find_length(node * current) {
+    int count = 0;
+    while (current != NULL) {
+        count++;
+        current = current->next;
+    }
+    return count;
 }
 
 
