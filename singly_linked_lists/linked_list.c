@@ -16,6 +16,7 @@ struct node * insert_at_the_beggining(node * head, int val);
 struct node * insert_at_the_end(node * head, int val);
 struct node * insert_in_any_posistion(node * haed, int val, int key);
 struct node * print_list(node * head);
+struct node * check_if_is_circular(node * head);
 
 
 int main(void) {
@@ -61,6 +62,15 @@ int main(void) {
     int length = find_length(head);
 
     printf("Total of elements in the list: %d\n", length);
+
+    
+
+    if (check_if_is_circular(head) == NULL) {
+        printf("This is not a circular linked list.\n");
+    } else {
+        printf("This is a circular linked list.\n");
+    }
+
 
     return 0;
 }
@@ -185,4 +195,16 @@ struct node * print_list(node * current) {
         current = current->next;
     }
     printf("%d}\n", current->value);
+}
+
+
+struct node * check_if_is_circular(node * current) {
+    node * head = current;
+    while (current->next != NULL) {
+        if (head->value == current->value) {
+            return NULL;
+        }
+        current = current->next;
+    }
+    return current;
 }
